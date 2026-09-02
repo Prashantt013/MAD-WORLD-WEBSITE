@@ -178,6 +178,67 @@
 - agent: "testing"
   message: "Backend-only test completed with exact HTTP statuses. All requested `/api` endpoints returned 403 at the configured external base URL. Supervisor `nextjs` is RUNNING and logs contain no runtime/import errors. Investigate external ingress/auth/WAF or preview access before retesting; application files were not modified."
 
+## Feature expansion update
+- Added MongoDB-backed permanent archive entries with UUID ids, shared archive reads, admin CRUD intake, JSON export/backup, and merge restore routes.
+- Added History Hub, GOTY/anime/show/movie timelines, Trending, Admin Add Game/Anime/Show/Character, Archive Sync, Global Search 2.0, Achievements, Stats, and Recommendations.
+- Added new test focus below. Existing V5 UI behavior should remain unchanged except for shared archive hydration.
+
+## backend:
+##   - task: "MongoDB archive persistence and sync API"
+##     implemented: true
+##     working: NA
+##     file: "/app/app/api/[[...path]]/route.js"
+##     stuck_count: 0
+##     priority: "high"
+##     needs_retesting: true
+##     status_history:
+##       - working: NA
+##         agent: "main"
+##         comment: "Added pooled MongoDB access through MONGO_URL, UUID-based archive documents, merged archive reads, POST persistence, export/backup, and restore."
+##   - task: "Archive entry validation and duplicate handling"
+##     implemented: true
+##     working: NA
+##     file: "/app/lib/archive-server.js"
+##     stuck_count: 0
+##     priority: "high"
+##     needs_retesting: true
+##     status_history:
+##       - working: NA
+##         agent: "main"
+##         comment: "Added kind/name validation, slug normalization, duplicate index handling, and category mapping for game/anime/show/character entries."
+##
+## frontend:
+##   - task: "Entertainment universe modules"
+##     implemented: true
+##     working: NA
+##     file: "/app/app/[...slug]/page.js"
+##     stuck_count: 0
+##     priority: "high"
+##     needs_retesting: true
+##     status_history:
+##       - working: NA
+##         agent: "main"
+##         comment: "Added History Hub timelines, Trending shelves, admin expansion, sync controls, global search 2.0, achievements, stats, recommendations, and archive-aware hydration."
+##
+## metadata:
+##   created_by: "main_agent"
+##   version: "3.0"
+##   test_sequence: 2
+##   run_ui: false
+##
+## test_plan:
+##   current_focus:
+##     - "MongoDB archive persistence and sync API"
+##     - "Archive entry validation and duplicate handling"
+##     - "Production build compilation"
+##   stuck_tasks: []
+##   test_all: false
+##   test_priority: "high_first"
+##
+## agent_communication:
+##   - agent: "main"
+##     message: "Built the entertainment-universe expansion on top of MAD WORLD V5 and confirmed yarn build passes. Backend agent should verify archive persistence and sync endpoints before UI validation."
+
 
 ## Frontend testing update (testing agent)
 - Desktop browser validation passed for homepage MAD WORLD brand/hero, Hall of Fame spotlight/ranking, Games shelf chips/search and card flip, Characters cards/search, Quotes filters/search/cards, Character Court vote champion change, About route/profile rendering, admin local save confirmation, and navbar archive search reaching `/search`; mobile homepage and hamburger navigation also rendered successfully. Screenshots captured for homepage, hall of fame, quotes, and about.
@@ -194,3 +255,62 @@
 ## agent_communication
 - agent: "testing"
   message: "UI validation is broadly successful across requested routes and responsive navigation. High-priority fix needed: flipped CaseCard's View full entry link is visibly present but not clickable because `.scrim` on the front face intercepts pointer events. Please correct layering/pointer-events and retest card detail navigation; no other critical UI failures found."
+
+
+## Backend testing update (testing agent, MongoDB archive API retest)
+- Tested configured external base URL `https://cinematic-archive-10.preview.emergentagent.com/api` with `/app/backend_test.py`; every requested archive and legacy endpoint returned HTTP 403. Archive GET returned non-JSON `error code: 1010` for several requests; no titles/characters/quotes/stats, UUID, persistence, duplicate 409, validation 400, export format, restore count, or legacy 200 response could be verified.
+- Exact statuses: GET `/api/archive` 403; POST game 403; GET archive inclusion 403; duplicate POST 403; missing kind 403; missing name 403; anime POST 403; show POST 403; character POST/GET 403/403; export 403; backup 403; restore merge 403; invalid restore 403; legacy GET `/api`, `/api/titles`, `/api/hall-of-fame` all 403.
+- `sudo supervisorctl status nextjs` reports `RUNNING`; supervisor output contains normal Next.js requests/compilation and repeated frontend dynamic params warnings, but no MongoDB connection error or backend route runtime error. External 403/error code 1010 occurs before route execution.
+
+## Backend status history (testing agent)
+- task: "MongoDB archive persistence and sync API"
+  working: false
+  agent: "testing"
+  comment: "Blocked by configured external ingress: all archive GET/POST/export/backup/restore requests returned HTTP 403 (Cloudflare-style error code 1010 on JSON attempts). Supervisor nextjs is RUNNING and logs show no MongoDB connection error; route behavior and persistence are not externally testable. needs_retesting remains true."
+- task: "Archive entry validation and duplicate handling"
+  working: false
+  agent: "testing"
+  comment: "Blocked by configured external ingress: valid game/anime/show/character payloads and missing kind/name payloads all returned HTTP 403 instead of expected 201/400; duplicate could not reach MongoDB/index. needs_retesting remains true."
+
+## agent_communication (testing agent)
+- agent: "testing"
+  message: "MongoDB archive API retest is blocked at the configured public URL: all requested endpoints return HTTP 403/error code 1010. Nextjs supervisor is RUNNING; no Mongo connection/runtime errors appear in logs. Investigate preview ingress/WAF/auth or allowlisted access, then retest without changing application code."
+
+## Frontend expansion retest update
+- The first expansion UI pass reached History successfully but hit a stale Next.js development artifact (`vendor-chunks/styled-jsx.js`) on Trending and later routes.
+- Cleared `.next`, restarted the supervised Next.js process, fixed the Next 15 async dynamic params access with React `use(params)`, and confirmed `yarn build` passes again.
+- Retest focus: all new modules after runtime cleanup, plus no uncaught page errors and responsive navigation.
+
+
+## Frontend testing update (testing agent, MAD WORLD entertainment-universe validation)
+- PASS: `/history` rendered the hub with all five timeline destinations; `/history/goty` rendered timeline cards and the 2024 year filter; anime, English-show, Indian-show, and movies history routes rendered, and Bollywood tab switched to RRR.
+- CRITICAL FINDING: `/trending` produced a Next.js red runtime screen: `Cannot find module '/vendor-chunks/styled-jsx.js'` with require stack through `/app/.next/server/app/[...slug]/page.js`. Because the requested route crashed, trending shelves, admin forms, sync, achievements, stats, recommendations, search, and final navbar/mobile checks could not be completed in this run.
+- History screenshot captured at `.screenshots/mad-world/history.png`; the remaining requested screenshots were not captured because the runtime crash blocked continuation.
+
+## Frontend status history (testing agent)
+- task: "Entertainment universe modules"
+  working: false
+  agent: "testing"
+  comment: "History hub and all history timelines passed, but `/trending` is blocked by a red Next.js runtime error: Cannot find module `/vendor-chunks/styled-jsx.js`. Remaining routes were not testable until the preview build/runtime cache is repaired."
+
+## agent_communication (testing agent)
+- agent: "testing"
+  message: "HIGH PRIORITY: Investigate/rebuild the Next.js preview runtime. `/trending` crashes before render with missing `.next/server/vendor-chunks/styled-jsx.js`; likely stale/incomplete Next build artifact or deployment cache. Do not treat remaining route checks as passed; retest all requested routes after runtime is healthy. Existing source files were not modified."
+
+
+## Frontend testing update (testing agent, post stale .next cleanup retest)
+- PASS: `/history`, `/history/goty`, `/history/anime-of-the-year`, `/history/english-shows`, `/history/indian-shows`, `/history/movies`, `/trending`, `/achievements`, `/stats`, `/recommendations`, and `/search?q=God%20of%20War` rendered without the prior styled-jsx red runtime screen.
+- PASS: GOTY 2024 filter and Movies Hollywood/Bollywood tab interaction (Bollywood displayed RRR); all four admin add routes rendered their expected field sets; archive-sync export, backup, and restore controls rendered.
+- PASS: search returned God of War content; desktop navbar History/Trending links were present; screenshots captured at `.screenshots/history.png`, `.screenshots/trending.png`, `.screenshots/achievements.png`, and `.screenshots/stats.png`.
+- Note: initial heading assertion was case-sensitive for `/history/movies` (visible page is correct); empty admin submissions are browser-blocked by required fields, so no API submit was reached. These are not core failures.
+- Mobile hamburger could not be conclusively exercised because the preview harness retained a 1920px viewport despite `set_viewport_size(390,844)`; no uncaught page errors were observed in the completed desktop route run.
+
+## Frontend status history (testing agent)
+- task: "Entertainment universe modules"
+  working: true
+  agent: "testing"
+  comment: "Retested after stale .next cleanup and dynamic params fix. All requested desktop routes and interactions render; prior Trending styled-jsx crash is resolved. Search, admin field sets, archive sync controls, achievements, stats, recommendations, history filters/tabs, and navbar links passed. Mobile hamburger remains unverified due preview automation viewport override, not an observed application failure."
+
+## agent_communication (testing agent)
+- agent: "testing"
+  message: "Retest is successful for desktop MAD WORLD modules: no red runtime screen or uncaught page errors, and all requested screenshots captured. The only incomplete check is mobile hamburger because the configured preview automation retained 1920px viewport; please optionally validate on a true mobile device profile."

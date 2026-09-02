@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 const LINKS = [
   { href: '/', label: 'Home' }, { href: '/hall-of-fame', label: 'Hall of Fame' }, { href: '/games', label: 'Games' }, { href: '/anime', label: 'Anime' },
-  { href: '/shows', label: 'Shows' }, { href: '/characters', label: 'Characters' }, { href: '/quotes', label: 'Quotes' }, { href: '/character-court', label: 'Court' }, { href: '/about', label: 'About' },
+  { href: '/shows', label: 'Shows' }, { href: '/characters', label: 'Characters' }, { href: '/quotes', label: 'Quotes' }, { href: '/trending', label: 'Trending' }, { href: '/history', label: 'History' }, { href: '/character-court', label: 'Court' }, { href: '/about', label: 'About' },
 ];
 
 export default function Nav() {
