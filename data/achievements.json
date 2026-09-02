@@ -1,0 +1,38 @@
+[
+ {
+  "id": 1,
+  "name": "Spartan Rage",
+  "description": "Own or have played every mainline God of War title.",
+  "icon": "\u2694\ufe0f",
+  "category": "games",
+  "unlock_criteria": "All God of War titles marked Owned / Played",
+  "progress_hint": "8 God of War titles logged"
+ },
+ {
+  "id": 2,
+  "name": "Master Assassin",
+  "description": "Complete five or more Hitman titles.",
+  "icon": "\ud83c\udfaf",
+  "category": "games",
+  "unlock_criteria": "5+ Hitman titles Owned / Played",
+  "progress_hint": "8 Hitman titles logged"
+ },
+ {
+  "id": 3,
+  "name": "Hall of Famer",
+  "description": "0 titles inducted into the Hall of Fame.",
+  "icon": "\ud83c\udfc6",
+  "category": "all",
+  "unlock_criteria": "Automatic \u2014 reflects current Hall of Fame count",
+  "progress_hint": "0 inducted"
+ },
+ {
+  "id": 4,
+  "name": "Genre Deep Dive: Horror",
+  "description": "Own or watch 10+ horror-tagged titles.",
+  "icon": "\ud83e\ude78",
+  "category": "all",
+  "unlock_criteria": "10+ titles tagged Survival Horror / Horror",
+  "progress_hint": "32 horror-tagged titles"
+ }
+]

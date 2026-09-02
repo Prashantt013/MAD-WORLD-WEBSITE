@@ -1,0 +1,922 @@
+[
+ {
+  "id": 254,
+  "text": "The name's Vercetti. Tommy Vercetti.",
+  "title_id": 1,
+  "title_slug": "gta-vice-city",
+  "title_name": "GTA Vice City",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 255,
+  "text": "The beautiful game.",
+  "title_id": 2,
+  "title_slug": "pes-04",
+  "title_name": "Pes 04",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 256,
+  "text": "It's all about timing.",
+  "title_id": 3,
+  "title_slug": "cricket-07",
+  "title_name": "Cricket 07",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 257,
+  "text": "The cycle ends here.",
+  "title_id": 4,
+  "title_slug": "god-of-war-ascension",
+  "title_name": "God of War Ascension",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 258,
+  "text": "The gods have chosen my path.",
+  "title_id": 5,
+  "title_slug": "god-of-war-chains-of-olympus",
+  "title_name": "God of War Chains of Olympus",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 259,
+  "text": "I am what the gods have made me.",
+  "title_id": 6,
+  "title_slug": "god-of-war-ghost-of-sparta",
+  "title_name": "God of War Ghost of Sparta",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 260,
+  "text": "The gods of Olympus have abandoned me.",
+  "title_id": 7,
+  "title_slug": "god-of-war-1",
+  "title_name": "God of war 1",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 261,
+  "text": "You will not see the end of this day.",
+  "title_id": 8,
+  "title_slug": "god-of-war-2",
+  "title_name": "God of war 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 262,
+  "text": "My vengeance ends now.",
+  "title_id": 9,
+  "title_slug": "god-of-war-3",
+  "title_name": "God of war 3",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 263,
+  "text": "Nothing is true, everything is permitted.",
+  "title_id": 10,
+  "title_slug": "assassins-creed-mirage",
+  "title_name": "Assassin's Creed Mirage",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 264,
+  "text": "Requiescat in pace.",
+  "title_id": 11,
+  "title_slug": "assassins-creed-2",
+  "title_name": "Assassin'S Creed 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 265,
+  "text": "May the Father of Understanding guide us.",
+  "title_id": 12,
+  "title_slug": "assassins-creed-rogue",
+  "title_name": "Assassin's creed rogue",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 266,
+  "text": "Requiescat in pace.",
+  "title_id": 13,
+  "title_slug": "assassins-creed-brotherhood",
+  "title_name": "Assassin's creed brotherhood",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 267,
+  "text": "No books. No wisdom. Just you, fratello mio.",
+  "title_id": 14,
+  "title_slug": "assassins-creed-revelations",
+  "title_name": "Assassin's creed Revelations",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 268,
+  "text": "What is a man but the sum of his memories?",
+  "title_id": 15,
+  "title_slug": "assassins-creed-3",
+  "title_name": "Assassin's creed 3",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 269,
+  "text": "I make my own luck.",
+  "title_id": 16,
+  "title_slug": "assassins-creed-unity",
+  "title_name": "Assassin's creed Unity",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 270,
+  "text": "London is our city.",
+  "title_id": 17,
+  "title_slug": "assassins-creed-syndicate",
+  "title_name": "Assassin's Creed Syndicate ",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 271,
+  "text": "In a world without gold, we might have been heroes.",
+  "title_id": 18,
+  "title_slug": "assassins-creed-4-black-flag",
+  "title_name": "Assassin's creed 4 Black Flag",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 272,
+  "text": "They were all dead. The final gunshot was an exclamation mark to everything that had led to this point.",
+  "title_id": 19,
+  "title_slug": "max-payne-1",
+  "title_name": "Max Payne 1",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 273,
+  "text": "There are no choices. Nothing but a straight line.",
+  "title_id": 20,
+  "title_slug": "max-payne-2",
+  "title_name": "Max Payne 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 274,
+  "text": "I had a hole in my second chance.",
+  "title_id": 21,
+  "title_slug": "max-payne-3",
+  "title_name": "Max Payne 3",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 275,
+  "text": "A survivor is born.",
+  "title_id": 22,
+  "title_slug": "tomb-raider",
+  "title_name": "Tomb raider",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 276,
+  "text": "A survivor is born.",
+  "title_id": 23,
+  "title_slug": "rise-of-the-tomb-raider",
+  "title_name": "Rise of the Tomb Raider",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 277,
+  "text": "A survivor is born.",
+  "title_id": 24,
+  "title_slug": "shadow-of-the-tomb-raider",
+  "title_name": "Shadow of the Tomb Raider",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 278,
+  "text": "Most people think time is like a river.",
+  "title_id": 25,
+  "title_slug": "prince-of-persia-the-sands-of-time",
+  "title_name": "Prince of Persia: The Sands of Time",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 279,
+  "text": "You cannot escape your destiny.",
+  "title_id": 26,
+  "title_slug": "prince-of-persia-warrior-within-2004",
+  "title_name": "Prince of Persia: Warrior Within (2004)",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 280,
+  "text": "The sands have returned.",
+  "title_id": 27,
+  "title_slug": "prince-of-persia-the-two-thrones-2005",
+  "title_name": "Prince of Persia: The Two Thrones (2005)",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 281,
+  "text": "Power must be earned.",
+  "title_id": 28,
+  "title_slug": "prince-of-persia-the-forgotten-sands",
+  "title_name": "Prince of Persia: The Forgotten Sands",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 282,
+  "text": "Light will guide us.",
+  "title_id": 29,
+  "title_slug": "prince-of-persia",
+  "title_name": "Prince of Persia",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 283,
+  "text": "Where's everyone going? Bingo?",
+  "title_id": 30,
+  "title_slug": "resident-evil-4",
+  "title_name": "Resident Evil 4",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 284,
+  "text": "Where's everyone going? Bingo?",
+  "title_id": 31,
+  "title_slug": "resident-evil-4-remaster",
+  "title_name": "Resident Evil 4 Remaster",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 285,
+  "text": "Complete. Global. Saturation.",
+  "title_id": 32,
+  "title_slug": "resident-evil-5",
+  "title_name": "Resident Evil 5",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 286,
+  "text": "No hope left.",
+  "title_id": 33,
+  "title_slug": "resident-evil-6",
+  "title_name": "Resident Evil 6",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 287,
+  "text": "Fear is watching.",
+  "title_id": 34,
+  "title_slug": "resident-evil-revelations-2",
+  "title_name": "Resident Evil: Revelations 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 288,
+  "text": "Welcome to the family, son.",
+  "title_id": 35,
+  "title_slug": "resident-evil-7",
+  "title_name": "Resident Evil 7",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 289,
+  "text": "This is just the beginning.",
+  "title_id": 36,
+  "title_slug": "resident-evil-2",
+  "title_name": "Resident Evil 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 290,
+  "text": "STARS...",
+  "title_id": 37,
+  "title_slug": "resident-evil-3",
+  "title_name": "Resident Evil 3",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 291,
+  "text": "You're all going to see miracles.",
+  "title_id": 38,
+  "title_slug": "resident-evil-village",
+  "title_name": "Resident Evil Village",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 292,
+  "text": "What the hell is going on here?",
+  "title_id": 39,
+  "title_slug": "the-evil-within",
+  "title_name": "The Evil Within",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 293,
+  "text": "You can save her.",
+  "title_id": 40,
+  "title_slug": "the-evil-within-2",
+  "title_name": "The Evil Within 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 294,
+  "text": "Did I ever tell you the definition of insanity?",
+  "title_id": 41,
+  "title_slug": "far-cry-3",
+  "title_name": "Far Cry 3",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 295,
+  "text": "I told you, God wouldn't let you take me.",
+  "title_id": 42,
+  "title_slug": "far-cry-4",
+  "title_name": "Far Cry 4",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 296,
+  "text": "Only you.",
+  "title_id": 43,
+  "title_slug": "far-cry-5",
+  "title_name": "Far Cry 5",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 297,
+  "text": "We are survivors.",
+  "title_id": 44,
+  "title_slug": "far-cry-new-dawn",
+  "title_name": "Far Cry New Dawn",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 298,
+  "text": "The world has gone crazy!",
+  "title_id": 45,
+  "title_slug": "bully",
+  "title_name": "Bully",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 299,
+  "text": "Names are for friends.",
+  "title_id": 46,
+  "title_slug": "hitman-codename-47",
+  "title_name": "Hitman Codename 47",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 300,
+  "text": "Good work, 47.",
+  "title_id": 47,
+  "title_slug": "hitman-2-silemt-assassin",
+  "title_name": "Hitman 2 Silemt Assassin",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 301,
+  "text": "Death is a profession.",
+  "title_id": 48,
+  "title_slug": "hitman-contracts",
+  "title_name": "Hitman Contracts",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 302,
+  "text": "Death of a showman.",
+  "title_id": 49,
+  "title_slug": "hitman-blood-money",
+  "title_name": "Hitman Blood Money",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 303,
+  "text": "Hope begins with a choice.",
+  "title_id": 50,
+  "title_slug": "hitman-absolution",
+  "title_name": "Hitman Absolution",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 304,
+  "text": "Good work, 47.",
+  "title_id": 51,
+  "title_slug": "hitman",
+  "title_name": "Hitman",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 305,
+  "text": "Good work, 47.",
+  "title_id": 52,
+  "title_slug": "hitman-2",
+  "title_name": "Hitman 2 ",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 306,
+  "text": "This is the end of the line.",
+  "title_id": 53,
+  "title_slug": "hitman-3",
+  "title_name": "Hitman 3",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 307,
+  "text": "Keep that hair short.",
+  "title_id": 54,
+  "title_slug": "the-walking-dead-1",
+  "title_name": "The Walking Dead 1",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 308,
+  "text": "Still. Not. Bitten.",
+  "title_id": 55,
+  "title_slug": "the-walking-dead-2",
+  "title_name": "The Walking Dead 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 309,
+  "text": "Family is everything.",
+  "title_id": 56,
+  "title_slug": "the-walking-dead-3",
+  "title_name": "The Walking Dead 3",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 310,
+  "text": "Everything is connected.",
+  "title_id": 57,
+  "title_slug": "watch-dogs",
+  "title_name": "Watch Dogs",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 311,
+  "text": "Stay Human.",
+  "title_id": 58,
+  "title_slug": "dying-light-2",
+  "title_name": "Dying Light 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 312,
+  "text": "No one messes with the Cruz brothers.",
+  "title_id": 59,
+  "title_slug": "total-overdose",
+  "title_name": "Total Overdose",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 313,
+  "text": "Earn this.",
+  "title_id": 60,
+  "title_slug": "call-of-duty",
+  "title_name": "Call Of Duty",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 314,
+  "text": "Kyrie!",
+  "title_id": 61,
+  "title_slug": "devil-may-cry-4",
+  "title_name": "Devil May Cry 4",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 315,
+  "text": "Jackpot!",
+  "title_id": 62,
+  "title_slug": "devil-may-cry-5",
+  "title_name": "Devil May Cry 5",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 316,
+  "text": "The zombies are coming.",
+  "title_id": 63,
+  "title_slug": "plants-vs-zombies",
+  "title_name": "Plants vs Zombies",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 317,
+  "text": "Mission accepted.",
+  "title_id": 64,
+  "title_slug": "igi-1",
+  "title_name": "IGI 1",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 318,
+  "text": "Stay focused.",
+  "title_id": 65,
+  "title_slug": "igi-2",
+  "title_name": "IGI 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 319,
+  "text": "One shot. One kill.",
+  "title_id": 66,
+  "title_slug": "sniper-ghost-warrior-2",
+  "title_name": "Sniper Ghost Warrior 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 320,
+  "text": "Ghosts lead the way.",
+  "title_id": 67,
+  "title_slug": "tom-clancys-ghost-recon",
+  "title_name": "Tom Clancy\u2019s Ghost Recon",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 321,
+  "text": "Do not be sorry. Be better.",
+  "title_id": 68,
+  "title_slug": "god-of-war-2018",
+  "title_name": "God of War (2018)",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 322,
+  "text": "For better or worse.",
+  "title_id": 69,
+  "title_slug": "uncharted-4-a-thiefs-end",
+  "title_name": "Uncharted 4: A Thief\u2019s End",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 323,
+  "text": "Nothing is ever lost.",
+  "title_id": 70,
+  "title_slug": "uncharted-the-lost-legacy",
+  "title_name": "Uncharted The Lost Legacy",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 324,
+  "text": "Fear never dies.",
+  "title_id": 71,
+  "title_slug": "resident-evil-requiem",
+  "title_name": "Resident evil requiem",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 325,
+  "text": "Viva Libertad.",
+  "title_id": 72,
+  "title_slug": "far-cry-6",
+  "title_name": "Far Cry 6",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 326,
+  "text": "Open your heart to it.",
+  "title_id": 73,
+  "title_slug": "god-of-war-ragnar-k-2022",
+  "title_name": "God of War Ragnar\u00f6k (2022)",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 327,
+  "text": "Ride into the broken road.",
+  "title_id": 74,
+  "title_slug": "days-gone",
+  "title_name": "Days Gone",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 328,
+  "text": "My name is Connor. I'm the android sent by CyberLife.",
+  "title_id": 75,
+  "title_slug": "detroit",
+  "title_name": "Detroit",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 329,
+  "text": "Honor died on the beach.",
+  "title_id": 76,
+  "title_slug": "ghost-of-tsushima",
+  "title_name": "Ghost of Tsushima",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 330,
+  "text": "Evil is evil. Lesser, greater, middling... makes no difference.",
+  "title_id": 77,
+  "title_slug": "the-witcher-3",
+  "title_name": "The Witcher 3",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 331,
+  "text": "We're thieves in a world that don't want us no more.",
+  "title_id": 78,
+  "title_slug": "red-dead-redemption-2",
+  "title_name": "Red Dead Redemption 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 332,
+  "text": "Wake the hell up, Samurai.",
+  "title_id": 79,
+  "title_slug": "cyberpunk-2077",
+  "title_name": "Cyberpunk 2077",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 333,
+  "text": "Praise the Sun.",
+  "title_id": 80,
+  "title_slug": "dark-souls-3",
+  "title_name": "Dark Souls 3",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 334,
+  "text": "With great power comes great responsibility.",
+  "title_id": 81,
+  "title_slug": "spider-man",
+  "title_name": "Spider Man",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 335,
+  "text": "War. War never changes.",
+  "title_id": 82,
+  "title_slug": "fall-out",
+  "title_name": "Fall Out",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 336,
+  "text": "Sleep? I never sleep.",
+  "title_id": 83,
+  "title_slug": "assassins-creed-origins",
+  "title_name": "Assassin's Creed Origins",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 337,
+  "text": "The system needs a reset.",
+  "title_id": 84,
+  "title_slug": "watch-dogs-2",
+  "title_name": "Watch Dogs 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 338,
+  "text": "Run. Hide. Survive.",
+  "title_id": 85,
+  "title_slug": "outlast",
+  "title_name": "Outlast",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 339,
+  "text": "Run. Hide. Survive.",
+  "title_id": 86,
+  "title_slug": "outlast-2",
+  "title_name": "Outlast 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 340,
+  "text": "Endure and survive.",
+  "title_id": 87,
+  "title_slug": "last-of-us-1",
+  "title_name": "Last Of Us 1",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 341,
+  "text": "We let you live. And you wasted it.",
+  "title_id": 88,
+  "title_slug": "last-of-us-2",
+  "title_name": "Last Of Us 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 342,
+  "text": "In my restless dreams, I see that town.",
+  "title_id": 89,
+  "title_slug": "silent-hill-2",
+  "title_name": "Silent Hill 2",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 343,
+  "text": "Go go go!",
+  "title_id": 90,
+  "title_slug": "counter-strike",
+  "title_name": "Counter strike",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 344,
+  "text": "EA Sports. It's in the game.",
+  "title_id": 91,
+  "title_slug": "fifa",
+  "title_name": "Fifa",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ },
+ {
+  "id": 345,
+  "text": "Can you smell what The Rock is cooking?",
+  "title_id": 92,
+  "title_slug": "wwe2k",
+  "title_name": "WWE2k",
+  "category_ref": "games",
+  "character_id": null,
+  "quote_category": "iconic"
+ }
+]

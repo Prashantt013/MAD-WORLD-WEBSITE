@@ -1,0 +1,1 @@
+export default function Footer() { return <footer className="footer"><div><span className="footer-brand">MAD WORLD</span><span>Personal archive of stories worth remembering.</span></div><span>Curated by Prashant · © {new Date().getFullYear()}</span></footer>; }
