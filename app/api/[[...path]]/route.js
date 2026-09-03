@@ -1,62 +1,102 @@
 import { NextResponse } from 'next/server';
+import facts from '../../../data/facts.json';
 import { ALL_TITLES, characters, getHallOfFame, getStats, quotes } from '../../../lib/data';
-import { ARCHIVE_FORMAT, getArchiveCollection, publicEntry, readCustomEntries, validateEntry } from '../../../lib/archive-server';
+import { buildArchive } from '../../../lib/archive-merge';
+import { ARCHIVE_FORMAT, deleteEntry, isAdmin, publicEntry, readCustomEntries, restoreEntries, saveEntry, validateEntry } from '../../../lib/archive-server';
+import { getTrending } from '../../../lib/live';
+import { getNews } from '../../../lib/news';
+import { getAwards } from '../../../lib/awards';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-function normalizeCustom(entries) {
-  const titles = entries.filter((entry) => entry.kind !== 'character').map(publicEntry).map((entry) => ({ ...entry, id: entry.id, category: entry.category || `${entry.kind}s`, title: entry.title || entry.name, slug: entry.slug, genre: entry.genre || [], cover_url: entry.cover_url || entry.image || null, famous_quote: entry.famous_quote || entry.quote || null }));
-  const customCharacters = entries.filter((entry) => entry.kind === 'character').map(publicEntry).map((entry) => ({ ...entry, id: entry.id, slug: entry.slug, name: entry.name, franchise: entry.franchise || '', type: 'Custom Character', famous_line: entry.famous_line || entry.quote || '', cover_url: entry.cover_url || entry.image || null }));
-  return { titles, characters: customCharacters };
-}
+const noStore = { 'Cache-Control': 'no-store' };
+const live = { 'Cache-Control': 'public, s-maxage=600, stale-while-revalidate=1800' };
+const json = (body, init = {}) => NextResponse.json(body, { ...init, headers: { ...noStore, ...(init.headers || {}) } });
+const forbidden = () => json({ error: 'Admin password required.' }, { status: 401 });
 
-async function mergedArchive() {
-  const custom = normalizeCustom(await readCustomEntries());
-  return { titles: [...ALL_TITLES, ...custom.titles], characters: [...characters, ...custom.characters], quotes, stats: { ...getStats(), games: getStats().games + custom.titles.filter((entry) => entry.category === 'games').length, anime: getStats().anime + custom.titles.filter((entry) => entry.category === 'anime').length, shows: getStats().shows + custom.titles.filter((entry) => entry.category === 'shows').length, characters: characters.length + custom.characters.length } };
+function searchArchive(archive, term) {
+  const q = term.toLowerCase();
+  const score = (haystack) => { const text = haystack.toLowerCase(); if (!text.includes(q)) return 0; return text.startsWith(q) ? 3 : 1; };
+  const titles = archive.titles.map((title) => ({ item: title, score: score(title.title) * 3 + score(`${(title.genre || []).join(' ')} ${title.summary || ''} ${title.famous_quote || ''} ${title.status || ''}`) })).filter((entry) => entry.score > 0).sort((a, b) => b.score - a.score).map((entry) => entry.item);
+  const chars = archive.characters.map((character) => ({ item: character, score: score(character.name) * 3 + score(`${character.franchise || ''} ${character.famous_line || ''} ${character.type || ''}`) })).filter((entry) => entry.score > 0).sort((a, b) => b.score - a.score).map((entry) => entry.item);
+  const matchedQuotes = archive.quotes.filter((quote) => `${quote.text} ${quote.title_name}`.toLowerCase().includes(q));
+  return { query: term, titles, characters: chars, quotes: matchedQuotes, total: titles.length + chars.length + matchedQuotes.length };
 }
 
 export async function GET(request, { params }) {
   try {
     const path = (await params)?.path || [];
-    if (path[0] === 'archive') {
-      const archive = await mergedArchive();
-      if (path[1] === 'export' || path[1] === 'backup') return new NextResponse(JSON.stringify({ format: ARCHIVE_FORMAT, version: 1, exportedAt: new Date().toISOString(), entries: await readCustomEntries() }, null, 2), { headers: { 'Content-Type': 'application/json', 'Content-Disposition': `attachment; filename="mad-world-${path[1]}.json"`, 'Cache-Control': 'no-store' } });
-      return NextResponse.json(archive, { headers: { 'Cache-Control': 'no-store' } });
-    }
+    const url = new URL(request.url);
     const resource = path[0] || 'summary';
-    if (resource === 'titles') return NextResponse.json({ titles: ALL_TITLES });
-    if (resource === 'characters') return NextResponse.json({ characters });
-    if (resource === 'quotes') return NextResponse.json({ quotes });
-    if (resource === 'hall-of-fame') return NextResponse.json({ titles: getHallOfFame() });
-    return NextResponse.json({ stats: getStats(), titleCount: ALL_TITLES.length, characterCount: characters.length, quoteCount: quotes.length });
+
+    if (resource === 'archive') {
+      const custom = await readCustomEntries();
+      if (path[1] === 'export' || path[1] === 'backup') return new NextResponse(JSON.stringify({ format: ARCHIVE_FORMAT, version: 2, exportedAt: new Date().toISOString(), entries: custom }, null, 2), { headers: { 'Content-Type': 'application/json', 'Content-Disposition': `attachment; filename="mad-world-${path[1]}.json"`, ...noStore } });
+      const archive = buildArchive(custom);
+      if (path[1] === 'recent') return json({ recent: archive.recent });
+      if (path[1] === 'custom') return json({ entries: custom.map(publicEntry) });
+      return json(archive);
+    }
+    if (resource === 'search') {
+      const term = (url.searchParams.get('q') || '').trim();
+      if (!term) return json({ query: '', titles: [], characters: [], quotes: [], total: 0 });
+      return json(searchArchive(buildArchive(await readCustomEntries()), term));
+    }
+    if (resource === 'trending') return NextResponse.json(await getTrending(), { headers: live });
+    if (resource === 'news') return NextResponse.json(await getNews(), { headers: live });
+    if (resource === 'awards') return NextResponse.json({ tracks: await getAwards(url.searchParams.get('track') || undefined) }, { headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800' } });
+    if (resource === 'facts') return NextResponse.json({ facts }, { headers: live });
+    if (resource === 'admin' && path[1] === 'status') return json({ protected: Boolean(process.env.ADMIN_PASSWORD), mongo: Boolean(process.env.MONGO_URL) });
+    if (resource === 'titles') return json({ titles: ALL_TITLES });
+    if (resource === 'characters') return json({ characters });
+    if (resource === 'quotes') return json({ quotes });
+    if (resource === 'hall-of-fame') return json({ titles: getHallOfFame() });
+    return json({ name: 'MAD WORLD API', version: 7, stats: getStats(), endpoints: ['/api/archive', '/api/archive/recent', '/api/search?q=', '/api/trending', '/api/news', '/api/awards', '/api/facts'] });
   } catch (error) {
-    return NextResponse.json({ error: 'Unable to read the archive', detail: error.message }, { status: 500 });
+    return json({ error: 'Unable to read the archive', detail: error.message }, { status: 500 });
   }
 }
 
 export async function POST(request, { params }) {
   try {
     const path = (await params)?.path || [];
-    if (path[0] === 'archive' && path[1] === 'restore') {
-      const payload = await request.json();
-      if (payload?.format !== ARCHIVE_FORMAT || !Array.isArray(payload.entries)) return NextResponse.json({ error: 'Unsupported backup format' }, { status: 400 });
-      const collection = await getArchiveCollection();
-      if (payload.mode === 'replace') await collection.deleteMany({});
-      const docs = payload.entries.map((entry) => ({ ...entry, _id: entry._id || entry.id, id: undefined, createdAt: entry.createdAt ? new Date(entry.createdAt) : new Date(), updatedAt: new Date() })).filter((entry) => entry._id);
-      if (docs.length) await collection.bulkWrite(docs.map((entry) => ({ updateOne: { filter: { _id: entry._id }, update: { $set: entry }, upsert: true } })), { ordered: false });
-      return NextResponse.json({ restored: docs.length, mode: payload.mode === 'replace' ? 'replace' : 'merge' });
+    if (path[0] === 'admin' && path[1] === 'verify') {
+      const payload = await request.json().catch(() => ({}));
+      const expected = process.env.ADMIN_PASSWORD;
+      if (!expected || payload?.password === expected) return json({ ok: true });
+      return json({ ok: false, error: 'Incorrect password.' }, { status: 401 });
     }
-    if (path[0] !== 'archive') {
-      const payload = await request.json();
-      if (!payload?.name) return NextResponse.json({ error: 'A title name is required' }, { status: 400 });
-      return NextResponse.json({ ok: true, title: { ...payload, id: `local-${Date.now()}` } }, { status: 201 });
+    if (path[0] !== 'archive') return json({ error: 'Not found' }, { status: 404 });
+    if (!isAdmin(request)) return forbidden();
+    const payload = await request.json();
+    if (path[1] === 'restore') {
+      if (payload?.format !== ARCHIVE_FORMAT || !Array.isArray(payload.entries)) return json({ error: 'Unsupported backup format' }, { status: 400 });
+      const restored = await restoreEntries(payload.entries, payload.mode === 'replace' ? 'replace' : 'merge');
+      return json({ restored, mode: payload.mode === 'replace' ? 'replace' : 'merge' });
     }
-    const validation = validateEntry(await request.json());
-    if (validation.error) return NextResponse.json({ error: validation.error }, { status: 400 });
-    try { await (await getArchiveCollection()).insertOne(validation.entry); } catch (error) { if (error?.code === 11000) return NextResponse.json({ error: 'This entry already exists in the archive.' }, { status: 409 }); throw error; }
-    return NextResponse.json(publicEntry(validation.entry), { status: 201 });
+    const validation = validateEntry(payload);
+    if (validation.error) return json({ error: validation.error }, { status: 400 });
+    const result = await saveEntry(validation.entry);
+    if (result.error) return json({ error: result.error }, { status: result.status || 400 });
+    return json({ ...publicEntry(result.entry), storage: result.storage }, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ error: 'Unable to save archive entry', detail: error.message }, { status: 400 });
+    return json({ error: 'Unable to save archive entry', detail: error.message }, { status: 400 });
   }
+}
+
+export async function DELETE(request, { params }) {
+  try {
+    const path = (await params)?.path || [];
+    if (path[0] !== 'archive' || !path[1]) return json({ error: 'Not found' }, { status: 404 });
+    if (!isAdmin(request)) return forbidden();
+    const removed = await deleteEntry(path[1]);
+    return json({ removed });
+  } catch (error) {
+    return json({ error: 'Unable to delete archive entry', detail: error.message }, { status: 400 });
+  }
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204 });
 }

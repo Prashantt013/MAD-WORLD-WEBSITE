@@ -1,186 +1,79 @@
-# MAD WORLD V4
+# MAD WORLD V7 — Cinematic Entertainment Archive
 
-A personal entertainment archive — Games, Anime, Shows, Horror, Characters, Quotes,
-Hall of Fame, and an Archive Report — built with Next.js (static export), so it
-deploys straight to GitHub Pages with no server required.
+A premium, Netflix/IMDb-style personal archive of games, anime, shows, movies, characters and quotes — with **live trending data, a news hub and real award history** — built on Next.js 15 (App Router) and MongoDB.
 
-## What's new in this pass: real posters
+## What's new in V7
 
-Every title and character now renders its actual poster/portrait art instead
-of a text-only gradient case. 253 items total:
+| Area | Upgrade |
+| --- | --- |
+| Design system | Deep purple / crimson / gold palette, glass panels, glows, hover depth, film-grain background |
+| Navbar | Blur-glass, active pill highlight, hover underline animation, scroll-shrink, lucide social icons, `Add` CTA |
+| Home | Left-side floating **poster stack** (auto-rotating Hall of Fame + top games/anime), 7-tile stats strip, live trending & news teasers |
+| Stats (`/stats`) | Replaces Character Court. Count-up hero tiles, distribution donut, growth timeline, franchises, genres, Hall of Fame statistics, recently added |
+| Trending (`/trending`) | **Real data**: Steam (top sellers + most played, keyless), RAWG & IGDB (optional keys), MyAnimeList via Jikan with AniList fallback, TMDB movies/series (optional key). Cached 30 min |
+| News Hub (`/news`) | IGN, GameSpot, Steam news wire, Anime News Network, MyAnimeList, Variety, THR, Collider (RSS). Featured story + grid, source filters, TMDB release radar (optional). Cached 15 min |
+| History (`/history`) | Real winners: The Game Awards GOTY, Crunchyroll Anime of the Year, Emmy Outstanding Drama, Oscar Best Picture (2014 → 2025/26) with posters, timeline layout |
+| Fun facts | Floating bottom-right widget, 44 anime/game/movie/character facts, auto-rotate 45 s, next/close, remembers dismissal per session |
+| Posters | Strict chain: **sheet poster URL → local file → generated gradient title card**. 252/253 items now use the master sheet's poster links |
+| Add (`/add`) | Password-protected universal intake (Game / Anime / Show / Movie) with live card preview. Saves to MongoDB and instantly updates Home, shelves, Quotes, Hall of Fame, Stats and search |
+| Archive Sync | MongoDB + local JSON fallback, export/backup/restore, delete, re-sync, search indexing |
+| About | Digital-museum layout: rooms, gaming & anime journey timelines, milestones, achievement cards |
+| Deployment | `next build` passes clean, no hydration warnings, Vercel-ready, all secrets via env |
 
-- **232 resolved from your local image folders** (Games, Anime, English Shows,
-  Hindi Shows, Horror movies, Character), fuzzy-matched by filename and copied
-  into `/public/posters/<category>/<slug>.<ext>`
-- **20 resolved from the `Cover/Poster` / `Poster Link` URL columns** in your
-  spreadsheet, for titles that had no local file
-- **1 with no image anywhere** (Joe Goldberg) — falls back to the gradient
-  case design automatically, same as before
-
-If an image URL ever breaks or a local file goes missing, the card detects
-the failed load and falls back to the gradient — nothing renders broken.
-
-The homepage hero now also has a background image (`public/images/hero-bg.jpg`,
-from your wallpaper pack) with a dark scrim over it for text legibility.
-
-## This is also the "add more titles later" automation
-
-Adding a new game, show, or anime going forward is now just:
-
-1. Add a row to the relevant sheet tab in your spreadsheet (Title, Status,
-   Genre, etc.) — same as always.
-2. **Optional:** drop a poster image into the matching folder (e.g. a new
-   file in `Anime/`), named close to the title. Or just paste an image URL
-   into that row's `Cover/Poster` column instead — either works.
-3. Run:
-   ```bash
-   python3 scripts/generate-data.py path/to/MAD_WORLD_Master_Database.xlsx --assets path/to/asset/folder
-   ```
-   `--assets` should point at the folder that contains your `Games`, `Anime`,
-   `English Shows`, `Hindi Shows`, `Horror movies`, and `Character` subfolders.
-
-That single command rebuilds every file in `/data` **and** copies/matches
-posters. No manual JSON editing, no re-coding a component, ever.
-
-## ⚠️ Hall of Fame column is still blank in your spreadsheet
-
-Same issue as the last workbook, so I'm restating it: your actual spreadsheet's
-Hall of Fame column has no `Yes` values in it. The `/data/*.json` shipped here
-has it correctly restored (35 titles, from your stated all-time favorites),
-but that patch was applied to the *generated JSON only* — not your source file.
-
-**If you run `generate-data.py` again before fixing this, Hall of Fame will
-go back to 0.** Before your next regeneration: open the workbook, and on each
-tab's Hall of Fame column, mark `Yes` for your favorites. One-time fix, then
-the pipeline keeps it from then on.
-
-## Setup
+## Quick start
 
 ```bash
-npm install
-npm run dev       # http://localhost:3000
+yarn install
+cp .env.example .env      # fill in MONGO_URL, ADMIN_PASSWORD (+ optional API keys)
+yarn dev                  # http://localhost:3000
+yarn build && yarn start  # production
 ```
 
-I could not run `npm install` or `next build` myself in this environment —
-it has no network access, so packages can't be fetched here. I traced every
-import path by hand and confirmed they all resolve, tested the full data +
-poster pipeline against your real spreadsheet and asset folders, and checked
-the resulting design with a standalone static preview (real posters, hero
-background, Hall of Fame ribbons — all render correctly). But please run
-`npm run build` yourself before deploying, to catch anything only a real
-Next.js compile would surface.
+## Environment variables
 
-## Deploying to GitHub Pages
+See `.env.example`. Only `ADMIN_PASSWORD` is needed for the Add page; `MONGO_URL` makes entries permanent (without it the app writes to `data/custom-archive.json`, or `/tmp` on Vercel). `RAWG_API_KEY`, `IGDB_CLIENT_ID`/`IGDB_CLIENT_SECRET` and `TMDB_API_KEY` are optional and switch on extra live sources with no code changes.
 
-```bash
-npm run build     # outputs static site to /out
-```
+## Deploying to Vercel
 
-Push the contents of `/out` to your `gh-pages` branch (or use a GitHub Action
-that runs `npm run build` and publishes `/out`). If your repo isn't served
-from the domain root (e.g. `username.github.io/mad-world` instead of a
-custom domain), uncomment and set `basePath` in `next.config.mjs` to match
-your repo name first.
+1. Import the repo, framework preset **Next.js**.
+2. Add the environment variables above (MongoDB Atlas connection string recommended).
+3. Deploy. Live data endpoints set `s-maxage` headers so Vercel's edge cache serves them fast.
 
-**Note on image size:** the 232 local posters add up to ~46MB in `/public`.
-That's fine for GitHub Pages (well under its size limits) but worth knowing
-if you're also on a metered connection when you push.
+## Data pipeline
+
+- `data/*.json` — the static archive (games, anime, shows, horror, characters, quotes, about, awards, facts).
+- `scripts/sync_sheet.py` — pulls the public MAD WORLD Google Sheet and merges poster URLs, summaries, quotes, notes and ratings into the JSON (ids/slugs preserved). Run `python3 scripts/sync_sheet.py` whenever the sheet changes.
+- `scripts/resolve_award_posters.py` — one-off resolver that bakes Wikipedia poster URLs into `data/awards.json`.
+- Admin-added entries live in MongoDB (`archive_entries`) and are merged with the static data by `/api/archive`.
+
+## API
+
+| Endpoint | Description |
+| --- | --- |
+| `GET /api/archive` | Merged archive (static + MongoDB) with stats and recent entries |
+| `GET /api/archive/export` · `/backup` · `/custom` · `/recent` | Sync helpers |
+| `POST /api/archive` | Add an entry (header `x-admin-key`) |
+| `POST /api/archive/restore` | Merge/replace a backup (admin) |
+| `DELETE /api/archive/:id` | Remove an admin-added entry (admin) |
+| `POST /api/admin/verify` | Check the admin password |
+| `GET /api/search?q=` | Ranked search across titles, characters and quotes |
+| `GET /api/trending` | Live games / anime / movies & shows |
+| `GET /api/news` | Aggregated RSS news by category |
+| `GET /api/awards[?track=goty|anime|tv|movies]` | Award history |
+| `GET /api/facts` | Fun-fact pool |
 
 ## Project structure
 
 ```
-app/                 Next.js pages (App Router)
-  games/              Games library + [slug] detail pages
-  anime/              Anime library + [slug] detail pages
-  shows/              Shows library (English + Indian) + [slug] detail pages
-  horror/             Horror library + [slug] detail pages
-  hall-of-fame/       Curated Hall of Fame gallery
-  characters/         Character index + [slug] detail pages
-  quotes/             Quotes Wall
-  stats/              Archive Report (genre breakdown, achievements)
-  about/              Bio + socials
-  search/             Cross-category search results
-  character-court/    Head-to-head character bracket voting (Phase 3)
-  timeline/           Archive-order timeline (Phase 3 — see caveat below)
-  wrapped/            Taste-profile recap slides (Phase 3 — see caveat below)
-  certificate/[category]/[slug]/   Printable per-title archive certificate
-components/          Nav, Footer, CaseCard, CharacterCard, PosterThumb,
-                      LibraryGrid, TitleDetail
-lib/data.js          Single data-access layer — every page reads through this
-data/*.json          The actual archive data (regenerate via scripts/)
-public/posters/      Resolved poster/portrait images, by category
-public/images/       Hero background and other static site images
-scripts/generate-data.py   Rebuilds /data + posters from your Excel workbook
+app/
+  layout.js, page.js            # shell + home
+  [...slug]/page.js             # client router for every archive route
+  api/[[...path]]/route.js      # all API endpoints
+components/
+  Nav, Footer, FunFact, HeroStack, Poster, CaseCard, CharacterCard, LiveCard, NewsCard, TitleDetail, Certificate
+  pages/ archive, stats, trending, news, history, about, add, misc
+lib/
+  data.js (static loaders), analytics.js, useArchive.js (SWR), archive-merge.js
+  mongodb.js, cache.js, archive-server.js, live.js, news.js, awards.js  (server only)
+data/  scripts/  public/posters/
 ```
-
-## What's implemented from the Phase 2 plan
-
-- ✅ Individual detail pages per title (`/games/[slug]`, etc.) with related titles + characters
-- ✅ Real poster/portrait art on every card and detail page, with graceful fallback
-- ✅ Personal rating field in the schema (empty until you fill it in — shows "— / 10" until then)
-- ✅ Universal cross-category search
-- ✅ Quotes Wall (auto-extracted from every title's Famous Quote field)
-- ✅ Stats / Archive Report with genre breakdown and seeded achievements
-- ✅ Franchise-aware "More Like This" (matches by shared genre tags within a category)
-
-## Phase 3 additions
-
-- **Character Court** (`/character-court`) — an 8-character single-elimination
-  bracket, randomly drawn each visit. Winners persist to `localStorage` as a
-  "Past Champions" list (client-side only, no backend — resets if you clear
-  browser storage or switch devices).
-- **Archive Certificates** (`/certificate/[category]/[slug]`, linked from every
-  detail page) — a museum-placard-style page per title with a working
-  print/PDF button (`window.print()`, styled via `@media print`).
-- **MAD WORLD Timeline** (`/timeline`) — **read the in-page disclosure before
-  you trust this one.** There is no `date_added` or `date_completed` data
-  anywhere in the sheet yet, so this is sorted by *archive order* (the
-  sequence titles appear in your spreadsheet), not by when you actually
-  finished anything. It's built to become a real chronological timeline the
-  moment those date fields are populated — no code changes needed, just data.
-- **MAD WORLD Wrapped** (`/wrapped`) — a Spotify-Wrapped-style slide recap.
-  Same honesty caveat as Timeline: with no completion dates, this is a
-  **taste-profile snapshot** (top genre, a franchise-overlap guess, Hall of
-  Fame count, a random quote) — not a real "this year" recap. It'll become
-  one once dates exist.
-
-### Franchise detection is a guess, not real data
-
-`getTopFranchiseGuess()` in `lib/data.js` groups titles by their first 1–3
-words (case-normalized) — good enough to correctly surface "God of War" as
-your deepest franchise, but it's pattern-matching on titles, not a real
-`franchise_id` relationship. Treat it as a fun stat, not ground truth, until
-franchise grouping gets modeled properly.
-
-### Why Trakt / Stash / GG auto-sync isn't built
-
-This one's a real architecture decision, not a code gap:
-
-Your GG/Stash/Trakt data currently comes in as manual exports or screenshots
-because none of them expose an easy CSV export. Auto-syncing would mean
-calling their APIs directly, which changes the shape of this whole project:
-
-1. **API tokens can't live in a static site.** Anything shipped to a static
-   export is public — a token embedded in the JS bundle is visible to anyone
-   who views source. It needs a server to hold the secret.
-2. **That means adding a backend** — even a minimal one, like a Vercel/Netlify
-   serverless function on a schedule that writes into `/data/*.json` and
-   redeploys. Buildable, just not "static HTML/JSON on GitHub Pages" as-is.
-3. **GG and Stash** would need the same treatment *if* they ever expose a
-   public API — neither does as of this writing.
-
-If you want this built, the honest next step is deciding whether to move
-hosting off GitHub Pages to something like Vercel — a hosting decision worth
-making deliberately, not as a side effect of a sync feature.
-
-## What's not done yet
-
-- **Client-side persistence** ("Currently Playing" tracking, progress bars) —
-  needs a `currently_playing` status value added to the data model.
-- **Franchise clustering UI** (grouping God of War 1–4 visually as one shelf) —
-  the data relationship isn't modeled yet beyond genre-tag matching.
-- **Story DNA radar chart** — not started; would need theme tags (revenge,
-  redemption, found-family, etc.) added per title first.
-- **Real chronological Timeline / Wrapped** — both pages exist and work today,
-  but need `date_added` / `date_completed` filled into the sheet to become
-  genuinely date-based instead of archive-order-based.
